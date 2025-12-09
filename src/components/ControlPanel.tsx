@@ -13,6 +13,7 @@ interface ControlPanelProps {
   onShowFavorites: () => void;
   onShowVersionHistory: () => void;
   onShowTutorial: () => void;
+  onShowAbout: () => void;
 }
 
 export function ControlPanel({ 
@@ -21,7 +22,8 @@ export function ControlPanel({
   onToggleCollapse,
   onShowFavorites,
   onShowVersionHistory,
-  onShowTutorial 
+  onShowTutorial,
+  onShowAbout
 }: ControlPanelProps) {
   const [streamUrl, setStreamUrl] = useState('');
   const [volume, setVolume] = useState([100]);
@@ -268,6 +270,13 @@ export function ControlPanel({
               onClick={onShowTutorial}
             >
               使用教學
+            </Button>
+            <Button
+              variant="outline"
+              className={theme === 'dark' ? 'border-blue-500/50 text-blue-400 hover:bg-blue-500/10' : 'border-blue-300 text-blue-700 hover:bg-blue-50'}
+              onClick={onShowAbout}
+            >
+              關於我們
             </Button>
           </div>
         </Section>

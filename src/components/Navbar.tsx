@@ -1,13 +1,14 @@
-import { Search, Settings, Heart, LayoutGrid, Globe, Sun, Moon, LayoutDashboard, Coffee } from 'lucide-react';
+import { Search, Settings, Heart, LayoutGrid, Globe, Sun, Moon, LayoutDashboard, Coffee, Info } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 
 interface NavbarProps {
   theme: 'light' | 'dark';
   onThemeToggle: () => void;
+  onShowAbout?: () => void;
 }
 
-export function Navbar({ theme, onThemeToggle }: NavbarProps) {
+export function Navbar({ theme, onThemeToggle, onShowAbout }: NavbarProps) {
   return (
     <nav className={`w-full border-b ${theme === 'dark' ? 'bg-black border-gray-800' : 'bg-white border-gray-200'} px-6 py-3`}>
       <div className="flex items-center justify-between gap-6">
@@ -106,6 +107,19 @@ export function Navbar({ theme, onThemeToggle }: NavbarProps) {
             <Coffee className="size-4 mr-2" />
             贊助我
           </Button>
+
+          {/* 關於我們 */}
+          {onShowAbout && (
+            <Button
+              variant="ghost"
+              size="icon"
+              className={theme === 'dark' ? 'text-gray-300 hover:text-white hover:bg-gray-800' : 'text-gray-600 hover:text-black hover:bg-gray-100'}
+              title="關於我們"
+              onClick={onShowAbout}
+            >
+              <Info className="size-5" />
+            </Button>
+          )}
         </div>
       </div>
     </nav>

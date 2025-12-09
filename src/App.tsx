@@ -5,11 +5,13 @@ import { VersionHistory } from './components/VersionHistory';
 import { Tutorial } from './components/Tutorial';
 import { ControlPanel } from './components/ControlPanel';
 import { FavoritesManager } from './components/FavoritesManager';
-import { Button } from './components/ui/button';
-import { ChevronLeft } from 'lucide-react';
+import { AboutPage } from './components/AboutPage';
+
+type Page = 'home' | 'about';
 
 export default function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const [currentPage, setCurrentPage] = useState<Page>('home');
   const [showVersionHistory, setShowVersionHistory] = useState(false);
   const [showTutorial, setShowTutorial] = useState(false);
   const [showFavorites, setShowFavorites] = useState(false);
@@ -19,15 +21,28 @@ export default function App() {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
+  // Show About Page
+  if (currentPage === 'about') {
+    return (
+      <AboutPage 
+        theme={theme} 
+        onThemeToggle={toggleTheme}
+        onBack={() => setCurrentPage('home')}
+      />
+    );
+  }
+
+  // Show Home Page
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-950' : 'bg-gray-50'}`}>
-      <Navbar theme={theme} onThemeToggle={toggleTheme} />
+      <Navbar theme={theme} onThemeToggle={toggleTheme} onShowAbout={() => setCurrentPage('about')} />
       
       <div className={`container mx-auto px-4 py-12 ${isPanelCollapsed ? '' : 'pr-[516px]'} transition-all duration-300`}>
         <WelcomeCard 
           theme={theme}
           onShowVersionHistory={() => setShowVersionHistory(true)}
           onShowTutorial={() => setShowTutorial(true)}
+          onShowAbout={() => setCurrentPage('about')}
         />
       </div>
 
@@ -38,6 +53,7 @@ export default function App() {
         onShowFavorites={() => setShowFavorites(true)}
         onShowVersionHistory={() => setShowVersionHistory(true)}
         onShowTutorial={() => setShowTutorial(true)}
+        onShowAbout={() => setCurrentPage('about')}
       />
 
       {showVersionHistory && (

@@ -1,4 +1,4 @@
-import { Coffee, FileText, HelpCircle } from 'lucide-react';
+import { Coffee, FileText, HelpCircle, Info } from 'lucide-react';
 import { Button } from './ui/button';
 import {
   Select,
@@ -12,9 +12,10 @@ interface WelcomeCardProps {
   theme: 'light' | 'dark';
   onShowVersionHistory: () => void;
   onShowTutorial: () => void;
+  onShowAbout?: () => void;
 }
 
-export function WelcomeCard({ theme, onShowVersionHistory, onShowTutorial }: WelcomeCardProps) {
+export function WelcomeCard({ theme, onShowVersionHistory, onShowTutorial, onShowAbout }: WelcomeCardProps) {
   return (
     <div className={`max-w-3xl mx-auto ${theme === 'dark' ? 'bg-gradient-to-br from-purple-900/20 to-blue-900/20' : 'bg-gradient-to-br from-purple-50 to-blue-50'} rounded-lg border ${theme === 'dark' ? 'border-purple-500/30' : 'border-purple-200'} p-8 shadow-xl`}>
       {/* Header */}
@@ -136,6 +137,14 @@ export function WelcomeCard({ theme, onShowVersionHistory, onShowTutorial }: Wel
         >
           <HelpCircle className="size-4 mr-2" />
           使用教學
+        </Button>
+        <Button
+          variant="outline"
+          className={theme === 'dark' ? 'border-green-500/50 text-green-400 hover:bg-green-500/10' : 'border-green-300 text-green-700 hover:bg-green-50'}
+          onClick={onShowAbout}
+        >
+          <Info className="size-4 mr-2" />
+          關於我們
         </Button>
       </div>
     </div>

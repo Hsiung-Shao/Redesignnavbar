@@ -6,9 +6,10 @@ interface AboutPageProps {
   theme: 'light' | 'dark';
   onThemeToggle: () => void;
   onBack: () => void;
+  onNavigateToPrivacy?: () => void;
 }
 
-export function AboutPage({ theme, onThemeToggle, onBack }: AboutPageProps) {
+export function AboutPage({ theme, onThemeToggle, onBack, onNavigateToPrivacy }: AboutPageProps) {
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-950' : 'bg-gray-50'}`}>
       {/* Header Navigation */}
@@ -128,7 +129,7 @@ export function AboutPage({ theme, onThemeToggle, onBack }: AboutPageProps) {
               theme={theme}
               icon={<Star className="size-6" />}
               title="收藏系統"
-              description="收藏喜���的串流，支援分類管理、Twitch 頻道搜尋、開台狀態檢測、匯出/匯入 JSON 檔案"
+              description="收藏喜的串流，支援分類管理、Twitch 頻道搜尋、開台狀態檢測、匯出/匯入 JSON 檔案"
             />
             
             <FeatureCard
@@ -365,12 +366,14 @@ export function AboutPage({ theme, onThemeToggle, onBack }: AboutPageProps) {
             >
               首頁
             </button>
-            <a
-              href="#"
-              className={`hover:underline ${theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'}`}
-            >
-              隱私權政策
-            </a>
+            {onNavigateToPrivacy && (
+              <button
+                onClick={onNavigateToPrivacy}
+                className={`hover:underline ${theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'}`}
+              >
+                隱私權政策
+              </button>
+            )}
             <a
               href="https://forms.gle/AjG922YrXFbyAdBa6"
               target="_blank"

@@ -6,8 +6,9 @@ import { Tutorial } from './components/Tutorial';
 import { ControlPanel } from './components/ControlPanel';
 import { FavoritesManager } from './components/FavoritesManager';
 import { AboutPage } from './components/AboutPage';
+import { PrivacyPage } from './components/PrivacyPage';
 
-type Page = 'home' | 'about';
+type Page = 'home' | 'about' | 'privacy';
 
 export default function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
@@ -21,6 +22,18 @@ export default function App() {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
+  // Show Privacy Page
+  if (currentPage === 'privacy') {
+    return (
+      <PrivacyPage 
+        theme={theme} 
+        onThemeToggle={toggleTheme}
+        onBack={() => setCurrentPage('home')}
+        onNavigateToAbout={() => setCurrentPage('about')}
+      />
+    );
+  }
+
   // Show About Page
   if (currentPage === 'about') {
     return (
@@ -28,6 +41,7 @@ export default function App() {
         theme={theme} 
         onThemeToggle={toggleTheme}
         onBack={() => setCurrentPage('home')}
+        onNavigateToPrivacy={() => setCurrentPage('privacy')}
       />
     );
   }
